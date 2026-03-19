@@ -3,7 +3,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-int main()
+//function prototypes
+void gameOver(bool over, int arr_R[3][3][2], int arr_B[3][3][2]); //recently modified by dihhcoderhahah
+int getCardinalities(int arr[3][3][2]); //recently modified by dihhcoderhahah
+
+int main() //recently modified by dihhcoderhahah
 {	
 	int i,j,k;
 
@@ -123,5 +127,43 @@ int main()
 	
 	return 0;
 }
+
+void gameOver(bool over, int arr_R[3][3][2], int arr_B[3][3][2])
+{
+	char result[3][20] = {"R Wins", "B wins", "draw"};
+	int card_R = getCardinalities(arr_R);
+	int card_B = getCardinalities(arr_B);
+	if (over && card_R > card_B)
+	{
+		printf("%s\n", result[0]);
+	}
+	else if (over && card_B > card_R)
+	{
+		printf("%s\n", result[1]);
+	}
+	else if (over && card_R == card_B) 
+	{
+		printf("%s\n", result[2]);
+	}
+}
+
+
+int getCardinalities(int arr[3][3][2])
+{
+	int i, j, count = 0;
+	for(i = 0; i < 3; i++)
+	{
+		for(j = 0; j < 3; j++)
+		{
+			if(arr[i][j][0] != 0 && arr[i][j][1] != 0)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+
 
 

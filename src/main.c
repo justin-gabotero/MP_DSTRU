@@ -20,14 +20,20 @@ typedef struct {
 // function prototypes
 void gameOver(const GameContext *ctx);
 int getCardinalities(const GameContext *ctx, char setName);
+void removePos(GameContext *ctx, int a, int b);
 
 int main() {
   int i, j, k;
 
   // applicable sets
-  int arr_M[3][3][2] = {{{1, 1}, {1, 2}, {1, 3}},
-                        {{2, 1}, {2, 2}, {2, 3}},
-                        {{3, 1}, {3, 2}, {3, 3}}};
+  int arr_M[3][3][2];
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
+      arr_M[i][j][0] = i + 1;
+      arr_M[i][j][1] = j + 1;
+    }
+  }
 
   // System Variables
   GameContext ctx;
@@ -86,6 +92,22 @@ int main() {
   gameOver(&ctx);
 
   return 0;
+}
+
+void removePos(GameContext *ctx, int a, int b) {
+  if (a >= 1 && a <= 3 && b >= 1 && b <= 3) {
+    if (ctx->go) {
+      ctx->arr_R[a - 1][b - 1][0] = 0;
+      ctx->arr_R[a - 1][b - 1][1] = 0;
+    } else {
+      ctx->arr_B[a - 1][b - 1][0] = 0;
+      ctx->arr_B[a - 1][b - 1][1] = 0;
+    }
+    ctx->arr_S[a - 1][b - 1][0] = 0;
+    ctx->arr_S[a - 1][b - 1][1] = 0;
+    ctx->arr_T[a - 1][b - 1][0] = 0;
+    ctx->arr_T[a - 1][b - 1][1] = 0;
+  }
 }
 
 void gameOver(const GameContext *ctx) {

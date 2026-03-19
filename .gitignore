@@ -1,2 +1,6 @@
-/bin/*
+# Build output directory
+/build/
+
+# Ignore test files
 *.txt
+test_runner.c

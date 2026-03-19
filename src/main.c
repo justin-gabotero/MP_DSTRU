@@ -10,11 +10,11 @@ typedef struct {
   bool over;
   bool found;
   int val;
-  int arr_R[3][3][2];
-  int arr_B[3][3][2];
-  int arr_S[3][3][2];
-  int arr_T[3][3][2];
-  int arr_F[3][3][2];
+  int arr_R[3][3][2]; // Red player positions
+  int arr_B[3][3][2]; // Blue player positions
+  int arr_S[3][3][2]; // Visited positions
+  int arr_T[3][3][2]; // Expanded positions (piece ability)
+  int arr_F[3][3][2]; // Empty positions
 } GameContext;
 
 // function prototypes
@@ -27,6 +27,8 @@ int main() {
 
   // applicable sets
   int arr_M[3][3][2];
+
+  int card_F, card_R, card_B;
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
@@ -77,9 +79,9 @@ int main() {
     }
   }
 
-  int card_F = getCardinalities(&ctx, 'F');
-  int card_R = getCardinalities(&ctx, 'R');
-  int card_B = getCardinalities(&ctx, 'B');
+  card_F = getCardinalities(&ctx, 'F');
+  card_R = getCardinalities(&ctx, 'R');
+  card_B = getCardinalities(&ctx, 'B');
 
   if (card_F == 3 || ctx.val >= 20 ||
       (!ctx.start &&
